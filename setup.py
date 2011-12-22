@@ -6,7 +6,7 @@ setup(
     name='upfront.shorturl',
     version=version,
     description="Provide an auto-complete Change Note field for CMFEditions",
-    long_description=open("README.txt").read(),
+    long_description=open("README").read(),
     # Get more strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         "Programming Language :: Python",
