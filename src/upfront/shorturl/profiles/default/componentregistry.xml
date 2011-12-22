@@ -5,6 +5,5 @@
   <utility
      interface="upfront.shorturl.interfaces.IShortURLStorage"
      factory="upfront.shorturl.storage.ShortURLStorage" />
-  </utility>
  </utilities>
 </componentregistry>
