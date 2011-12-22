@@ -3,7 +3,7 @@
  <adapters/>
  <utilities>
   <utility
-     interface="upfront.shorturl.interfaces.IIShortURLStorage"
+     interface="upfront.shorturl.interfaces.IShortURLStorage"
      factory="upfront.shorturl.storage.ShortURLStorage" />
   </utility>
  </utilities>
