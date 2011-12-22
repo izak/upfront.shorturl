@@ -2,4 +2,21 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="upfront.shorturl">
+
+    <browser:page
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        name="manage-shorturls"
+        class=".views.EditView"
+        template="edit.pt"
+        permission="cmf.ManagePortal"
+        />
+
+    <browser:page
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        name="shorturl"
+        class=".views.RedirectView"
+        permission="cmf.ManagePortal"
+        />
+
+
 </configure>
