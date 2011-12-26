@@ -22,7 +22,7 @@
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         name="shorturl"
         class=".views.RedirectView"
-        permission="cmf.ManagePortal"
+        permission="zope2.View"
         />
 
 </configure>
