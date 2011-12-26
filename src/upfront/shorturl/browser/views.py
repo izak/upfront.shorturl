@@ -30,10 +30,10 @@ class AddView(BrowserView):
     template = ViewPageTemplateFile("add.pt")
 
     def __call__(self):
+        errors = {}
         if self.request.get('form.submitted', None) is not None:
             shortcode = self.request.get('shortcode', '')
             target = self.request.get('target', '')
-            errors = {}
             if not shortcode:
                 errors.update(
                     {'shortcode': _(u'You must provide a short code.')})
