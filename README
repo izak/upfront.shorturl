@@ -1,0 +1,5 @@
+Introduction
+============
+This is a simple url shortener service. It keeps a simple btree of short codes
+that map to a url. The url is not limited to your current plone site, but
+can be anything.
