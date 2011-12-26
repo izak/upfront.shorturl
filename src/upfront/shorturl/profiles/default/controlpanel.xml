@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<object
+    name="portal_controlpanel"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="upfront.shorturl"
+    purge="False">
+    
+    <configlet
+        title="Short URLs"
+        action_id="shorturl"
+        appId="upfront.shorturl" 
+        category="Products"
+        condition_expr=""
+        url_expr="string:${portal_url}/@@manage-shorturls"
+        icon_expr="string:${portal_url}/maintenance_icon.png"
+        visible="True"    
+        i18n:attributes="title">
+            <permission>Manage portal</permission>
+    </configlet>
+
+</object>
