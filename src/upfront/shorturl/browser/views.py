@@ -1,3 +1,4 @@
+import re
 from zExceptions import NotFound
 from zope.component import queryUtility
 from zope.interface import implements
@@ -7,6 +8,8 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.CMFPlone.PloneBatch import Batch
 from upfront.shorturl.interfaces import IShortURLStorage
 from upfront.shorturl import MessageFactory as _
+
+SHORTURLRE=re.compile(r'^[a-zA-Z0-9]+$')
 
 class EditView(BrowserView):
     def update(self):
@@ -36,9 +39,10 @@ class AddView(BrowserView):
                     {'shortcode': _(u'You must provide a short code.')})
             if not target:
                 errors.update({'target': _(u'You must provide a target.')})
-            if errors:
-                self.request['errors'] = errors
-            else:
+            if SHORTURLRE.match(shortcode) is None:
+                errors.update({'shortcode':
+                    _(u'Short codes may only contain alphanumeric characters.')})
+            if not errors:
                 storage = queryUtility(IShortURLStorage)
                 if storage.get(shortcode):
                     errors.update(
@@ -49,6 +53,7 @@ class AddView(BrowserView):
                         '%s/@@manage-shorturls' % self.context.absolute_url())
                     return ''
                     
+        self.request['errors'] = errors
         return self.template()
 
 class RedirectView(BrowserView):
@@ -61,6 +66,8 @@ class RedirectView(BrowserView):
         self.traversecode = None
 
     def lookup(self, code):
+        if SHORTURLRE.match(code) is None:
+            return None
         storage = queryUtility(IShortURLStorage)
         return storage.get(code, None)
 
