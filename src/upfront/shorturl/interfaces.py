@@ -15,3 +15,6 @@ class IShortURLStorage(Interface):
 
     def get(short, default=None):
         """ Return the target for the given short, or default if not found. """
+
+    def __iter__():
+        """ Iterator for working through all mappings. """

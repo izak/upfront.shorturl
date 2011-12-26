@@ -1,8 +1,25 @@
 <html metal:use-macro="here/main_template/macros/master"
       i18n:domain="upfront.shorturl" >
 <body>
-    <div metal:fill-slot="main">
-        Redirect view
+    <div metal:fill-slot="main"
+         tal:define="error request/error|nothing">
+        <form tal:attributes="action string:${context/absolute_url}/@@shorturl"
+              method="post">
+            <div class="field"
+                 tal:attributes="class python:error and 'field error' or 'field'">
+                <label for="shortcode">Short Code</label>
+                <span class="fieldRequired" title="Required"
+                      i18n:attributes="title title_required;"
+                      i18n:translate="label_required">
+                    (Required)
+                </span>
+                <div class="fieldErrorBox"
+                            tal:content="error">Error</div>
+                <input type="text" name="shortcode" size="8"
+                       tal:attributes="value request/shortcode|nothing" />
+                <input type="submit" value="Go" class="context" />
+            </div>
+        </form>
     </div>
 </body>
 </html>

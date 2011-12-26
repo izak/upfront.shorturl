@@ -1,8 +1,0 @@
-<html metal:use-macro="here/main_template/macros/master"
-      i18n:domain="upfront.shorturl" >
-<body>
-    <div metal:fill-slot="main">
-        Edit view
-    </div>
-</body>
-</html>

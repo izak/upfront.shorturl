@@ -7,7 +7,14 @@
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         name="manage-shorturls"
         class=".views.EditView"
-        template="edit.pt"
+        template="list.pt"
+        permission="cmf.ManagePortal"
+        />
+
+    <browser:page
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        name="add-shorturl"
+        class=".views.AddView"
         permission="cmf.ManagePortal"
         />
 
@@ -17,6 +24,5 @@
         class=".views.RedirectView"
         permission="cmf.ManagePortal"
         />
-
 
 </configure>

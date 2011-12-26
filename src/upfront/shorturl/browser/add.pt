@@ -1,0 +1,43 @@
+<html metal:use-macro="here/main_template/macros/master"
+      i18n:domain="upfront.shorturl" >
+<body>
+    <div metal:fill-slot="main">
+    <h1 i18n:translate="add_shorturl">Add Short Code</h1>
+
+    <form action="@@add-shorturl" method="post"
+          tal:define="errors python:request.get('errors', {})">
+        <div class="field"
+             tal:define="error errors/shortcode|nothing"
+             tal:attributes="class python:error and 'field error' or 'field'">
+            <label for="shortcode">Short Code</label>
+            <span class="fieldRequired" title="Required"
+                  i18n:attributes="title title_required;"
+                  i18n:translate="label_required">
+                (Required)
+            </span>
+            <div class="fieldErrorBox"
+                        tal:content="error">Error</div>
+            <input type="text" name="shortcode" size="8"
+                   tal:attributes="value request/shortcode|nothing" />
+        </div>
+        <div class="field"
+             tal:define="error errors/target|nothing"
+             tal:attributes="class python:error and 'field error' or 'field'">
+            <label for="target">Target</label>
+            <span class="fieldRequired" title="Required"
+                  i18n:attributes="title title_required;"
+                  i18n:translate="label_required">
+                (Required)
+            </span>
+            <div class="fieldErrorBox"
+                        tal:content="error">Error</div>
+            <input type="text" name="target" size="30"
+                   tal:attributes="value request/target|nothing" />
+        </div>
+        <input type="hidden" name="form.submitted" value="1" />
+        <input type="submit" class="context" name="form.button.Save"
+               value="Add Short Code" />
+    </form>
+    </div>
+</body>
+</html>

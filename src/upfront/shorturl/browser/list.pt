@@ -1,0 +1,38 @@
+<html metal:use-macro="here/main_template/macros/master"
+      i18n:domain="upfront.shorturl" >
+<body>
+    <div metal:fill-slot="main"
+         tal:define="dummy view/update;
+                     batch view/mappings">
+    <h1 i18n:translate="add_shorturl">Add Short Code</h1>
+        <form method="post" name="users_add" action="@@add-shorturl">
+          <input type="hidden" value="1" name="form.submitted">
+          <input type="submit" value="Add Short Code" class="standalone add">
+        </form>
+        <form tal:condition="batch"
+              method="post"
+              tal:attributes="action string:${context/absolute_url}/@@manage-shorturls">
+        <table class="listing">
+            <tr>
+                <th>Short Code</th>
+                <th>Target</th>
+                <th>Remove Shortcode</th>
+            </tr>
+            <tr tal:repeat="mapping batch">
+                <td tal:content="python: mapping[0]">shortcode</td>
+                <td>
+                    <a tal:attributes="href python:mapping[1]"
+                       tal:content="python: mapping[1]">target</a>
+                </td>
+                <td>
+                    <input type="checkbox" name="remove:list"
+                           tal:attributes="value python:mapping[0]"/>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" class="context" value="Remove shortcodes" />
+        <div metal:use-macro="context/batch_macros/macros/navigation"></div>
+        </form>
+    </div>
+</body>
+</html>

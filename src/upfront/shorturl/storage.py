@@ -22,3 +22,9 @@ class ShortURLStorage(Persistent):
 
     def get(self, short, default=None):
         return self._map.get(short, default)
+
+    def __getitem__(self, key):
+        return self._map.items()[key]
+
+    def __len__(self):
+        return len(self._map)
