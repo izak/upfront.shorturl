@@ -1,0 +1,29 @@
+<html metal:use-macro="here/main_template/macros/master"
+      i18n:domain="upfront.shorturl" >
+<body>
+    <div metal:fill-slot="main">
+    <h1 i18n:translate="add_shorturl">Import Short Codes</h1>
+    <p>You can upload a two-column csv file with the short code and the
+       target url in that order.</p>
+    <form action="@@import-shorturl" method="post"
+          enctype="multipart/form-data">
+        <div class="field"
+             tal:define="error request/error|nothing"
+             tal:attributes="class python:error and 'field error' or 'field'">
+            <label for="shortcode">Short Code</label>
+            <span class="fieldRequired" title="Required"
+                  i18n:attributes="title title_required;"
+                  i18n:translate="label_required">
+                (Required)
+            </span>
+            <div class="fieldErrorBox"
+                        tal:content="error">Error</div>
+            <input type="file" size="20" name="csvfile" class="fileType" />
+            <br />
+            <input type="submit" class="context" name="form.button.Save"
+                   value="Upload" />
+        </div>
+    </form>
+    </div>
+</body>
+</html>

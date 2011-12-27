@@ -20,6 +20,14 @@
 
     <browser:page
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        name="import-shorturl"
+        class=".views.AddView"
+        permission="cmf.ManagePortal"
+        attribute="importmap"
+        />
+
+    <browser:page
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         name="shorturl"
         class=".views.RedirectView"
         permission="zope2.View"

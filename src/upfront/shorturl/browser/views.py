@@ -1,4 +1,5 @@
 import re
+from csv import reader as csvreader
 from zExceptions import NotFound
 from zope.component import queryUtility
 from zope.interface import implements
@@ -27,7 +28,8 @@ class EditView(BrowserView):
         return Batch(storage, b_size, b_start)
 
 class AddView(BrowserView):
-    template = ViewPageTemplateFile("add.pt")
+    addtemplate = ViewPageTemplateFile("add.pt")
+    importtemplate = ViewPageTemplateFile("import.pt")
 
     def __call__(self):
         errors = {}
@@ -54,7 +56,27 @@ class AddView(BrowserView):
                     return ''
                     
         self.request['errors'] = errors
-        return self.template()
+        return self.addtemplate()
+
+    def _import(self, f):
+        storage = queryUtility(IShortURLStorage)
+        reader = csvreader(f)
+        error = None
+        for row in reader:
+            if len(row) < 2:
+                # Ignore rows with too few columns, this also deals with
+                # empty rows
+                continue
+            if SHORTURLRE.match(row[0]) is None:
+                # Ignore funny characters
+                return _(u'Your upload contains invalid characters.')
+            storage.add(row[0], row[1])
+        return error
+
+    def importmap(self):
+        if self.request.has_key('csvfile'):
+            self.request['error'] = self._import(self.request['csvfile'])
+        return self.importtemplate()
 
 class RedirectView(BrowserView):
     implements(IPublishTraverse)

@@ -1,4 +1,5 @@
 import os
+from StringIO import StringIO
 import unittest2 as unittest
 from plone.testing import z2
 
@@ -109,3 +110,21 @@ class TestShortURL(unittest.TestCase):
         self.portal.restrictedTraverse('@@shorturl')()
         self.assertTrue(request.get('error', None) is not None,
             "Looking up a non-existend short code should return an error message.")
+
+    def testCSVImport(self):
+        from zope.component import queryUtility
+        from upfront.shorturl.interfaces import IShortURLStorage
+        storage = queryUtility(IShortURLStorage)
+        
+        member = self.portal.restrictedTraverse('@@plone_portal_state').member()
+        z2.setRoles(self.portal.acl_users, member.getId(),
+            member.getRoles() + ['Manager'])
+        addview = self.portal.restrictedTraverse('@@add-shorturl')
+        f = StringIO("10,http://wasabishop\n22,http://was12\n")
+        error = addview._import(f)
+        self.assertTrue(len(storage)==2, "CSV import failed to import 2 items")
+        self.assertTrue(error is None, "Upload returned an error")
+
+        g = StringIO("101,http://apeaceprize\n22_11_2,http://theend\n")
+        error = addview._import(g)
+        self.assertTrue(error is not None, "Upload should return an error")
