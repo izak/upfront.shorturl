@@ -1,16 +1,15 @@
 <html metal:use-macro="context/prefs_main_template/macros/master"
       i18n:domain="upfront.shorturl" >
 <body>
-    <div metal:fill-slot="prefs_configlet_content"
+    <div metal:fill-slot="prefs_configlet_main"
          tal:define="dummy view/update;
                      batch view/mappings">
     <h1 i18n:translate="add_shorturl">Add Short Code</h1>
-        <form method="post" name="users_add" action="@@add-shorturl"
+        <form method="get" action="@@add-shorturl"
               style="display: inline">
-          <input type="hidden" value="1" name="form.submitted">
           <input type="submit" value="Add Short Code" class="standalone add">
         </form>
-        <form method="post" name="users_add" action="@@import-shorturl"
+        <form method="post" action="@@import-shorturl"
               style="display: inline">
           <input type="submit" value="Import CSV" class="standalone add">
         </form>

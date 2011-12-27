@@ -7,6 +7,7 @@ from zope.publisher.interfaces import IPublishTraverse
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.CMFPlone.PloneBatch import Batch
+from Products.statusmessages.interfaces import IStatusMessage
 from upfront.shorturl.interfaces import IShortURLStorage
 from upfront.shorturl import MessageFactory as _
 
@@ -75,7 +76,11 @@ class AddView(BrowserView):
 
     def importmap(self):
         if self.request.has_key('csvfile'):
-            self.request['error'] = self._import(self.request['csvfile'])
+            error = self._import(self.request['csvfile'])
+            if error is not None:
+                self.request['error'] = error
+            else:
+                IStatusMessage(self.request).addStatusMessage(_(u'CSV imported'))
         return self.importtemplate()
 
 class RedirectView(BrowserView):

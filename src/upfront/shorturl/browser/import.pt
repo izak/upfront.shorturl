@@ -1,7 +1,7 @@
-<html metal:use-macro="here/main_template/macros/master"
+<html metal:use-macro="context/prefs_main_template/macros/master"
       i18n:domain="upfront.shorturl" >
 <body>
-    <div metal:fill-slot="main">
+    <div metal:fill-slot="prefs_configlet_main">
     <h1 i18n:translate="add_shorturl">Import Short Codes</h1>
     <p>You can upload a two-column csv file with the short code and the
        target url in that order.</p>
