@@ -1,6 +1,6 @@
 from zope.interface import Interface, Attribute
 
-class IShortUrlLayer(Interface):
+class IShortURLLayer(Interface):
     """ Marker interface for this product. """
 
 class IShortURLStorage(Interface):

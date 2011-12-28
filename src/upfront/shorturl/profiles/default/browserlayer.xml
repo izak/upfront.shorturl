@@ -2,5 +2,5 @@
 <layers>
     <layer
         name="upfront.shorturl"
-        interface="upfront.shorturl.interfaces.IShortUrlLayer" />
+        interface="upfront.shorturl.interfaces.IShortURLLayer" />
 </layers>
