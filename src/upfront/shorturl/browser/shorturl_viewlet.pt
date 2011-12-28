@@ -1,0 +1,10 @@
+<div class="shorturl-viewlet">
+    <form tal:attributes="action string:${context/plone_portal_state/portal_url}/@@shorturl"
+          method="post">
+        <div class="field">
+            <label for="shortcode">Short Code</label>
+            <input type="text" name="shortcode" size="8" />
+            <input type="submit" value="Go" class="context" />
+        </div>
+    </form>
+</div>

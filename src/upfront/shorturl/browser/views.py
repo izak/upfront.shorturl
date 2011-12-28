@@ -4,6 +4,7 @@ from zExceptions import NotFound
 from zope.component import queryUtility
 from zope.interface import implements
 from zope.publisher.interfaces import IPublishTraverse
+from plone.app.layout.viewlets.common import ViewletBase
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.CMFPlone.PloneBatch import Batch
@@ -122,3 +123,6 @@ class RedirectView(BrowserView):
         self.request['error'] = error
         self.request['shortcode'] = shortcode
         return self.template()
+
+class ShortURLViewlet(ViewletBase):
+    index = ViewPageTemplateFile("shorturl_viewlet.pt")

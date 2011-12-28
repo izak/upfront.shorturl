@@ -3,3 +3,17 @@ Introduction
 This is a simple url shortener service. It keeps a simple btree of short codes
 that map to a url. The url is not limited to your current plone site, but
 can be anything.
+
+Viewlet
+=======
+
+You can display the shorturl redirector viewlet on any/all pages by adding
+the included viewlet using zcml:
+
+    <browser:viewlet
+        name="upfront.shorturl.viewlet"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContent"
+        class=".views.ShortURLViewlet"
+        permission="zope2.View"
+        layer="upfront.shorturl.interfaces.IShortURLLayer"
+        />
