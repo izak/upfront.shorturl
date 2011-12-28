@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<layers>
+    <layer
+        name="upfront.shorturl"
+        interface="upfront.shorturl.interfaces.IShortUrlLayer" />
+</layers>

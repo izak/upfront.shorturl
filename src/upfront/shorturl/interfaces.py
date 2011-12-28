@@ -1,5 +1,7 @@
 from zope.interface import Interface, Attribute
 
+class IShortUrlLayer(Interface):
+    """ Marker interface for this product. """
 
 class IShortURLStorage(Interface):
     """A storage for items where the old and the new location are known.
