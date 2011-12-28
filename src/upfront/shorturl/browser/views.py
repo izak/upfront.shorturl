@@ -35,6 +35,7 @@ class AddView(BrowserView):
 
     def __call__(self):
         errors = {}
+        storage = queryUtility(IShortURLStorage)
         if self.request.get('form.submitted', None) is not None:
             shortcode = self.request.get('shortcode', '')
             target = self.request.get('target', '')
@@ -47,7 +48,6 @@ class AddView(BrowserView):
                 errors.update({'shortcode':
                     _(u'Short codes may only contain alphanumeric characters.')})
             if not errors:
-                storage = queryUtility(IShortURLStorage)
                 if storage.get(shortcode):
                     errors.update(
                         {'shortcode': _(u'This short code is already in use.')})
@@ -58,6 +58,9 @@ class AddView(BrowserView):
                     return ''
                     
         self.request['errors'] = errors
+        if not self.request.has_key('shortcode'):
+            self.request['shortcode'] = storage.suggest()
+            
         return self.addtemplate()
 
     def _import(self, f):

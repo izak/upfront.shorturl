@@ -18,6 +18,9 @@ class IShortURLStorage(Interface):
     def get(short, default=None):
         """ Return the target for the given short, or default if not found. """
 
+    def suggest():
+        """ Suggests a new short code for an item. """
+
     def __getitem__(self, key):
         """ Return a tuple corresponding to the key'th key/value pair. """
 
