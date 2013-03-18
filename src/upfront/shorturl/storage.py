@@ -13,7 +13,7 @@ def _increment(code):
     if code.isalnum():
         i = 0
         result = ''
-        vocab = string.letters + string.digits
+        vocab = string.digits + string.letters
         for c in code:
             i = i*len(vocab) + vocab.index(c)
         i += 1
