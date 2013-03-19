@@ -128,3 +128,14 @@ class TestShortURL(unittest.TestCase):
         g = StringIO("101,http://apeaceprize\n22_11_2,http://theend\n")
         error = addview._import(g)
         self.assertTrue(error is not None, "Upload should return an error")
+
+    def test_suggest(self):
+        from zope.component import queryUtility
+        from upfront.shorturl.interfaces import IShortURLStorage
+        storage = queryUtility(IShortURLStorage)
+
+        d = {}
+        for i in range(100000):
+            key = storage.suggest()
+            assert storage.get(key) is None, "key = %s" % key
+            storage.add(key, i)
